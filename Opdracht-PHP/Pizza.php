@@ -12,7 +12,7 @@
 <body>
     <Div class="titel">
         <h1>Pizza di mama</h1>
-        Test repo
+
     </Div>
 
     <div class="formulier">
