@@ -1,0 +1,28 @@
+.tabel,
+tr {
+    border-style: 1px solid black;
+}
+
+.formulier {
+    width: 200px;
+}
+
+.formulieronderelkaar {
+    width: 40px;
+}
+
+.tekstinput {
+    margin: 10px;
+}
+
+.bezorgdiv {
+    width: 2000px;
+}
+
+.tableBorderL {
+    border: 1px solid black;
+}
+
+.tableBorderM {
+    border: 1px solid black;
+}
