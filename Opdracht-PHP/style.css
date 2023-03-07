@@ -1,10 +1,20 @@
-.tabel,
-tr {
-    border-style: 1px solid black;
+.main {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.titel {
+    text-align: center;
+}
+
+.tabel {
+    border: 1px solid black;
 }
 
 .formulier {
     width: 200px;
+    float: left;
 }
 
 .formulieronderelkaar {
@@ -17,16 +27,4 @@ tr {
 
 .bezorgdiv {
     width: 2000px;
-}
-
-.tableBorderL {
-    border: 1px dotted solid black;
-}
-
-.tableBorderM {
-    border: 1px solid black;
-}
-
-.tableBorderR {
-    border: 1px solid black;
 }

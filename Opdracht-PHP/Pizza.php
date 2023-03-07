@@ -10,80 +10,71 @@
 </head>
 
 <body>
-    <Div class="titel">
-        <h1>Pizza di mama</h1>
 
-    </Div>
+    <div class="main">
 
-    <div class="formulier">
-        <div class="formulieronderelkaar">
-            <form action="./Pizza.php" method="POST">
-                <input type="text" placeholder="Naam" name="naam" class="tekstinput">
-                <input type="text" placeholder="Adres" name="adres" class="tekstinput">
-                <input type="text" placeholder="Postcode" name="postcode" class="tekstinput">
-                <input type="text" placeholder="Plaats" name="plaats" class="tekstinput">
-                <label for="date"> Besteldatum </label>
-                <input id="date" type="datetime-local" name="be" class="tekstinput">
-                <div class="bezorgdiv">
-                    <label for=" bezorgoptie"> Bezorgoptie: </label>
-                    <input id="afhalen" type="radio" name="bezorgoptie">
-                    <label for="afhalen">Afhalen</label>
-                    <input id="bezorgen" type="radio" name="bezorgoptie">
-                    <label for="bezorgen">Bezorgen</label>
-                </div>
-
-                <input type="submit" value="Bestellen">
-            </form>
+        <div class="titel">
+            <h1>Pizza di mama</h1>
         </div>
-    </div>
 
-    <div>
-        <table class="tabel">
+
+        <div class="formulier">
+            <div class="formulieronderelkaar">
+                <form action="./Pizza.php" method="POST">
+                    <input type="text" placeholder="Naam" name="naam" class="tekstinput" required>
+                    <input type="text" placeholder="Adres" name="adres" class="tekstinput" required>
+                    <input type="text" placeholder="Postcode" name="postcode" class="tekstinput" required>
+                    <input type="text" placeholder="Plaats" name="plaats" class="tekstinput" required>
+                    <label for="date"> Besteldatum </label>
+                    <input id="date" type="datetime-local" name="be" class="tekstinput" required>
+                    <div class="bezorgdiv">
+                        <label for=" bezorgoptie"> Bezorgoptie: </label>
+                        <input id="afhalen" type="radio" name="bezorgoptie" required>
+                        <label for="afhalen">Afhalen</label>
+                        <input id="bezorgen" type="radio" name="bezorgoptie" required>
+                        <label for="bezorgen">Bezorgen</label>
+                    </div>
+
+                    <input type="submit" value="Bestellen">
+                </form>
+            </div>
+        </div>
+
+
+        <table class="tabel1">
             <tr>
                 <th>Soort</th>
                 <th>Prijs per stuk</th>
                 <th>Aantal</th>
             </tr>
             <tr>
-                <td class="tableBorderL">Pizza Margherita</td>
-                <td class="tableBorderM">12,50</td>
-                <td class="tableBorderR"><input type="number" name="aantal"></td>
+                <td class="tabel">Pizza Margherita</td>
+                <td class="tabel">12,50</td>
+                <td class="tabel"><input type="number" name="aantal"></td>
             <tr>
             <tr>
-                <td class="tableBorderL">Pizza Funghi</td>
-                <td class="tableBorderM"> 12,50</td>
-                <td class="tableBorderR"><input type="number" name="aantal"></td>
+                <td class="tabel">Pizza Funghi</td>
+                <td class="tabel"> 12,50</td>
+                <td class="tabel"><input type="number" name="aantal"></td>
             <tr>
             <tr>
-                <td class="tableBorderL">Pizza Marina</td>
-                <td class="tableBorderM">13,95</td>
-                <td class="tableBorderR"><input type="number" name="aantal"></td>
+                <td class="tabel">Pizza Marina</td>
+                <td class="tabel">13,95</td>
+                <td class="tabel"><input type="number" name="aantal"></td>
             <tr>
-                <td class="tableBorderL">Pizza Hawai</td>
-                <td class="tableBorderM">11,50</td>
-                <td class="tableBorderR"><input type="number" name="aantal"></td>
+                <td class="tabel">Pizza Hawai</td>
+                <td class="tabel">11,50</td>
+                <td class="tabel"><input type="number" name="aantal"></td>
 
             <tr>
-                <td class="tableBorderL">Pizza Quattro Formaggi</td>
-                <td class="tableBorderM">14,50</td>
-                <td class="tableBorderR"><input type="number" name="aantal"></td>
+                <td class="tabel">Pizza Quattro Formaggi</td>
+                <td class="tabel">14,50</td>
+                <td class="tabel"><input type="number" name="aantal"></td>
             </tr>
 
 
         </table>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>
