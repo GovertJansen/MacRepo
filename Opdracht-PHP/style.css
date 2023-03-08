@@ -9,6 +9,7 @@ body {
 }
 
 .titel {
+    font-family: sans-serif;
     text-align: center;
 }
 
@@ -40,4 +41,12 @@ body {
     margin-left: 350px;
     width: 100px;
     height: 50px;
+}
+
+.post {
+    font-family: sans-serif;
+    position: absolute;
+    text-align: center;
+    top: 560px;
+    left: 45%;
 }

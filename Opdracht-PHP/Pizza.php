@@ -10,6 +10,31 @@
 </head>
 
 <body>
+    <div class="post">
+        <?php
+        if (isset($_POST["submit"])) {
+            $naam = $_POST["naam"];
+            $adres = $_POST["adres"];
+            $postcode = $_POST["postcode"];
+            $plaats = $_POST["plaats"];
+            $tijd = $_POST["tijd"];
+            // $bezorgen = $_POST["bezorgen"];
+
+            echo "Bedankt voor de bestelling! <br>";
+            echo "Naam: " . $naam .
+                "<br>";
+            echo "Adres: " . $adres .
+                "<br>";
+            echo "Postcode: " . $postcode .
+                "<br>";
+            echo "Plaats: " . $plaats .
+                "<br>";
+            echo "Tijd: " . $tijd .
+                "<br>";
+            // echo $bezorgen;
+        }
+        ?>
+    </div>
 
     <div class="main">
 
@@ -17,16 +42,16 @@
             <h1>Pizza di mama</h1>
         </div>
 
-
         <div class="formulier">
             <div class="formulieronderelkaar">
-                <form action="./Pizza.php" method="POST">
+                <form action="Pizza.php" method="POST">
                     <input type="text" placeholder="Naam" name="naam" class="tekstinput" required>
                     <input type="text" placeholder="Adres" name="adres" class="tekstinput" required>
                     <input type="text" placeholder="Postcode" name="postcode" class="tekstinput" required>
                     <input type="text" placeholder="Plaats" name="plaats" class="tekstinput" required>
                     <label for="date"> Besteldatum </label>
-                    <input id="date" type="datetime-local" name="be" class="tekstinput" required>
+                    <input id="date" type="datetime-local" name="tijd" class="tekstinput" required>
+
                     <div class="bezorgdiv">
                         <label for=" bezorgoptie"> Bezorgoptie: </label>
                         <input id="afhalen" type="radio" name="bezorgoptie" required>
@@ -35,7 +60,7 @@
                         <label for="bezorgen">Bezorgen</label>
                     </div>
 
-                    <input class="bestellen" type="submit" value="Bestellen">
+                    <input class="bestellen" type="submit" value="Bestellen" name="submit">
                 </form>
             </div>
         </div>
@@ -76,7 +101,8 @@
         </table>
     </div>
 
-    <?php echo $_POST["adres"]  ?>
+
+
 
 
 </body>
