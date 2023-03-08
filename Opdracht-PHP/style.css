@@ -1,6 +1,10 @@
+body {
+    width: 100%;
+}
+
 .main {
     margin: auto;
-    width: 50%;
+    width: 40%;
     padding: 10px;
 }
 
@@ -13,7 +17,8 @@
 }
 
 .formulier {
-    width: 200px;
+    padding-left: 20px;
+    width: 250px;
     float: left;
 }
 
@@ -22,9 +27,17 @@
 }
 
 .tekstinput {
-    margin: 10px;
+    margin: 15px;
 }
 
 .bezorgdiv {
-    width: 2000px;
+    width: 280px;
+}
+
+.bestellen {
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 350px;
+    width: 100px;
+    height: 50px;
 }

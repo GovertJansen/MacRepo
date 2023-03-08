@@ -35,7 +35,7 @@
                         <label for="bezorgen">Bezorgen</label>
                     </div>
 
-                    <input type="submit" value="Bestellen">
+                    <input class="bestellen" type="submit" value="Bestellen">
                 </form>
             </div>
         </div>
@@ -50,31 +50,33 @@
             <tr>
                 <td class="tabel">Pizza Margherita</td>
                 <td class="tabel">12,50</td>
-                <td class="tabel"><input type="number" name="aantal"></td>
+                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
             <tr>
             <tr>
                 <td class="tabel">Pizza Funghi</td>
                 <td class="tabel"> 12,50</td>
-                <td class="tabel"><input type="number" name="aantal"></td>
+                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
             <tr>
             <tr>
                 <td class="tabel">Pizza Marina</td>
                 <td class="tabel">13,95</td>
-                <td class="tabel"><input type="number" name="aantal"></td>
+                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
             <tr>
                 <td class="tabel">Pizza Hawai</td>
                 <td class="tabel">11,50</td>
-                <td class="tabel"><input type="number" name="aantal"></td>
+                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
 
             <tr>
                 <td class="tabel">Pizza Quattro Formaggi</td>
                 <td class="tabel">14,50</td>
-                <td class="tabel"><input type="number" name="aantal"></td>
+                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
             </tr>
 
 
         </table>
     </div>
+
+    <?php echo $_POST["adres"]  ?>
 
 
 </body>
