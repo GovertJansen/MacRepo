@@ -9,16 +9,39 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
+<?php
+$pizza = array(
+    array('artikel' => 'Pizza Margherita', 'prijs' => 12.50, 'aantal' => 0),
+    array('artikel' => 'Pizza Funghi', 'prijs' => 12.50, 'aantal' => 0),
+    array('artikel' => 'Pizza Marina', 'prijs' => 13.95, 'aantal' => 0),
+    array('artikel' => 'Pizza Hawaii',  'prijs' => 11.30, 'aantal' => 0),
+    array('artikel' => 'Pizza Quattro Formaggi', 'prijs' => 14.50, 'aantal' => 0)
+);
+?>
+
 <body>
     <div class="post">
         <?php
+        $pizza1 = "";
+        $pizza2 = "";
+        $pizza3 = "";
+        $pizza4 = "";
+        $pizza5 = "";
+
         if (isset($_POST["submit"])) {
             $naam = $_POST["naam"];
             $adres = $_POST["adres"];
             $postcode = $_POST["postcode"];
             $plaats = $_POST["plaats"];
-            $tijd = $_POST["tijd"];
-            // $bezorgen = $_POST["bezorgen"];
+            $datum = strtotime($_POST["tijd"]);
+
+            // $pizza1 = $_POST["PizzaMargherita"];
+            // $pizza2 = $_POST["PizzaFunghi"];
+            // $pizza3 = $_POST["PizzaMarina"];
+            // $pizza4 = $_POST["PizzaHawai"];
+            // $pizza5 = $_POST["PizzaQuattroFormaggi"];
+
+
 
             echo "Bedankt voor de bestelling! <br>";
             echo "Naam: " . $naam .
@@ -29,10 +52,16 @@
                 "<br>";
             echo "Plaats: " . $plaats .
                 "<br>";
-            echo "Tijd: " . $tijd .
+            echo "Besteldatum: " . date('D d/M/Y', $datum) . ", " . date('H:i', $datum) .
                 "<br>";
-            // echo $bezorgen;
         }
+
+        if (isset($_POST["keuze"])) {
+            $keuze = $_POST["keuze"];
+            echo $keuze . "<br>";
+        }
+
+
         ?>
     </div>
 
@@ -42,9 +71,10 @@
             <h1>Pizza di mama</h1>
         </div>
 
-        <div class="formulier">
-            <div class="formulieronderelkaar">
-                <form action="Pizza.php" method="POST">
+        <form action="Pizza.php" method="POST">
+            <div class="formulier">
+                <div class="formulieronderelkaar">
+
                     <input type="text" placeholder="Naam" name="naam" class="tekstinput" required>
                     <input type="text" placeholder="Adres" name="adres" class="tekstinput" required>
                     <input type="text" placeholder="Postcode" name="postcode" class="tekstinput" required>
@@ -52,56 +82,93 @@
                     <label for="date"> Besteldatum </label>
                     <input id="date" type="datetime-local" name="tijd" class="tekstinput" required>
 
-                    <div class="bezorgdiv">
-                        <label for=" bezorgoptie"> Bezorgoptie: </label>
-                        <input id="afhalen" type="radio" name="bezorgoptie" required>
-                        <label for="afhalen">Afhalen</label>
-                        <input id="bezorgen" type="radio" name="bezorgoptie" required>
-                        <label for="bezorgen">Bezorgen</label>
-                    </div>
+                    <select name="keuze">
+                        <option disabled selected hidden value="">Maak uw keuze:</option>
+                        <option value="Afhalen">Afhalen</option>
+                        <option value="Bezorgen">Bezorgen</option>
+                    </select>
 
                     <input class="bestellen" type="submit" value="Bestellen" name="submit">
-                </form>
+
+                </div>
             </div>
-        </div>
 
 
-        <table class="tabel1">
+            <table class="tabel1">
+                <tr>
+                    <th>Soort</th>
+                    <th>Prijs</th>
+                    <th>Aantal</th>
+                </tr>
+
+                <?php
+                for ($i = 0; $i < count($pizza); $i++) {
+                    echo "<tr><td class='tabel'>" . $pizza[$i]['artikel'] . "</td><td class='tabel'>" . $pizza[$i]['prijs'] . "</td><td class='tabel'><input type='number' name='" . $pizza[$i]['artikel'] . "' size='3' min='0' value='0'></td></tr>";
+                }
+                ?>
+                <!--<tr>
+                    <td class="tabel">Pizza Margherita</td>
+                    <td class="tabel">12,50</td>
+                    <td class="tabel"><input type="number" name="PizzaMargherita" size="3" min="0" value="0"></td>
+                <tr>
+                <tr>
+                    <td class="tabel">Pizza Funghi</td>
+                    <td class="tabel"> 12,50</td>
+                    <td class="tabel"><input type="number" name="PizzaFunghi" size="3" min="0" value="0"></td>
+                <tr>
+                <tr>
+                    <td class="tabel">Pizza Marina</td>
+                    <td class="tabel">13,95</td>
+                    <td class="tabel"><input type="number" name="PizzaMarina" size="3" min="0" value="0"></td>
+                <tr>
+                    <td class="tabel">Pizza Hawai</td>
+                    <td class="tabel">11,50</td>
+                    <td class="tabel"><input type="number" name="PizzaHawai" size="3" min="0" value="0"></td>
+
+                <tr>
+                    <td class="tabel">Pizza Quattro Formaggi</td>
+                    <td class="tabel">14,50</td>
+                    <td class="tabel"><input type="number" name="PizzaQuattroFormaggi" size="3" min="0" value="0"></td>
+                </tr>-->
+
+
+            </table>
+        </form>
+
+        <table class="tabel2">
             <tr>
                 <th>Soort</th>
-                <th>Prijs per stuk</th>
                 <th>Aantal</th>
+                <th>Prijs</th>
             </tr>
             <tr>
                 <td class="tabel">Pizza Margherita</td>
-                <td class="tabel">12,50</td>
-                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
+                <td class="tabel"> <?php echo $pizza1; ?> </td>
+                <td class="tabel"> </td>
             <tr>
             <tr>
                 <td class="tabel">Pizza Funghi</td>
-                <td class="tabel"> 12,50</td>
-                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
+                <td class="tabel"> <?php echo $pizza2; ?> </td>
+                <td class="tabel"> </td>
             <tr>
             <tr>
                 <td class="tabel">Pizza Marina</td>
-                <td class="tabel">13,95</td>
-                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
+                <td class="tabel"> <?php echo $pizza3; ?> </td>
+                <td class="tabel"> </td>
             <tr>
                 <td class="tabel">Pizza Hawai</td>
-                <td class="tabel">11,50</td>
-                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
+                <td class="tabel"> <?php echo $pizza4; ?></td>
+                <td class="tabel"> </td>
 
             <tr>
                 <td class="tabel">Pizza Quattro Formaggi</td>
-                <td class="tabel">14,50</td>
-                <td class="tabel"><input type="number" name="aantal" size="3" min="0" value="0"></td>
+                <td class="tabel"> <?php echo $pizza5; ?> </td>
+                <td class="tabel"> </td>
             </tr>
 
 
         </table>
     </div>
-
-
 
 
 

@@ -48,5 +48,11 @@ body {
     position: absolute;
     text-align: center;
     top: 560px;
-    left: 45%;
+    left: 30%;
+}
+
+.tabel2 {
+    position: absolute;
+    top: 529px;
+    left: 910px;
 }
