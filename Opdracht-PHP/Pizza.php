@@ -22,6 +22,7 @@ $pizza = array(
 <body>
     <div class="post">
         <?php
+
         if (isset($_POST["submit"])) {
             $naam = $_POST["naam"];
             $adres = $_POST["adres"];
@@ -86,31 +87,55 @@ $pizza = array(
                 </tr>
                 <?php
                 for ($i = 0; $i < count($pizza); $i++) {
-                    echo "<tr><td class='tabel'>" . $pizza[$i]['artikel'] . "</td><td class='tabel'>" . $pizza[$i]['prijs'] . "</td><td class='tabel'><input type='number' name='aantal1'" . $pizza[$i]['artikel'] . "' size='3' min='0' value='0'></td></tr>";
+                    echo "<tr>
+                    <td class='tabel'> " . $pizza[$i]['artikel'] . " </td>
+                    <td class='tabel'> " . $pizza[$i]['prijs'] . " </td>
+                    <td class='tabel'> <input type='number' name='aantal1'" . $pizza[$i]['artikel'] . "' size='3' min='0' value='0'></td>
+                    </tr>";
                 }
                 ?>
-
             </table>
         </form>
 
+
         <table class="tabel2">
-            <?php
-            if (isset($_POST["submit"])) {
-                echo "<tr>
+
+            <tr>
                 <th>Soort</th>
                 <th>Aantal</th>
                 <th>Prijs</th>
-                </tr>";
+            </tr>
+            <tr>
+                <td class="tabel">Pizza Margherita</td>
+                <td class="tabel"> <?php echo ''; ?> </td>
+                <td class="tabel"> </td>
+            <tr>
+            <tr>
+                <td class="tabel">Pizza Funghi</td>
+                <td class="tabel"> <?php echo ''; ?> </td>
+                <td class="tabel"> </td>
+            <tr>
+            <tr>
+                <td class="tabel">Pizza Marina</td>
+                <td class="tabel"> <?php echo '' ?> </td>
+                <td class="tabel"> </td>
+            <tr>
+                <td class="tabel">Pizza Hawai</td>
+                <td class="tabel"> <?php echo ''; ?></td>
+                <td class="tabel"> </td>
 
-                for ($i = 0; $i < count($pizza); $i++) {
-                    echo "<tr><td class='tabel'>" . $pizza[$i]['artikel'] . "</td><td class='tabel'>" . "......" . "</td><td class='tabel'>" . "......" . " </td></tr>";
-                }
-                echo "<tr><th>Totale prijs= .... </th></tr>";
-            }
-            ?>
+            <tr>
+                <td class="tabel">Pizza Quattro Formaggi</td>
+                <td class="tabel"> <?php echo ''; ?> </td>
+                <td class="tabel"> </td>
+            </tr>
+
 
         </table>
+
     </div>
+
+
 
 
 
