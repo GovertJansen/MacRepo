@@ -1,5 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--  mooie bon, dag voluit, korting uit array   -->
+
+<?php
+$MaandagKorting = "7.50";
+$FriProcentKorting = "15";
+$ProcentKorting = "0.85";
+$FriPrijsVanaf = "20";
+$BezorgKosten = "5";
+$PizzaMargherita = "12.50";
+$PizzaFunghi = "12.50";
+$PizzaMarina = "13.95";
+$PizzaHawaii = "11.30";
+$PizzaQuattroFormaggi = "14.50";
+$PrijsMargherita = "";
+$PrijsFunghi = "";
+$PrijsMarina = "";
+$PrijsHawai = "";
+$PrijsFormaggi = "";
+$eindtotaal = "0";
+?>
+
 
 <head>
     <meta charset="UTF-8">
@@ -67,6 +88,7 @@
                     <label for="date"> Besteldatum </label>
                     <input id="date" type="datetime-local" name="tijd" class="tekstinput" required>
 
+                    <label>Bezorgen/Afhalen </label>
                     <select name="keuze">
                         <option name="afbe" disabled selected hidden value="">Maak uw keuze:</option>
                         <option name="afbe" value="Afhalen">Afhalen</option>
@@ -80,31 +102,31 @@
 
 
             <table class="tabel1">
-                <h5>Maandag alle pizza's 7.50,-<h5>
-                        <h5>Vrijdag 15% korting op je bestelling vanaf 20,-<h5>
-                                <h5>Bezorg kosten bedragen 5,-<h5>
+                <h5>Maandag alle pizza's €<?php echo $MaandagKorting; ?> <h5>
+                        <h5>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf <?php echo $FriPrijsVanaf; ?>€<h5>
+                                <h5>Bezorg kosten bedragen <?php echo $BezorgKosten; ?>€<h5>
                                         <tr>
                                             <td class="tabel">Pizza Margherita</td>
-                                            <td class="tabel">12,50</td>
+                                            <td class="tabel">€<?php echo $PizzaMargherita; ?></td>
                                             <td class="tabel"><input type="number" name="AantalMargherita" size="3" min="0" value="0"></td>
                                         <tr>
                                         <tr>
                                             <td class="tabel">Pizza Funghi</td>
-                                            <td class="tabel"> 12,50</td>
+                                            <td class="tabel"> €<?php echo $PizzaFunghi; ?></td>
                                             <td class="tabel"><input type="number" name="AantalFunghi" size="3" min="0" value="0"></td>
                                         <tr>
                                         <tr>
                                             <td class="tabel">Pizza Marina</td>
-                                            <td class="tabel">13,95</td>
+                                            <td class="tabel">€<?php echo $PizzaMarina; ?></td>
                                             <td class="tabel"><input type="number" name="AantalMarina" size="3" min="0" value="0"></td>
                                         <tr>
                                             <td class="tabel">Pizza Hawai</td>
-                                            <td class="tabel">11,50</td>
+                                            <td class="tabel">€<?php echo $PizzaHawaii; ?></td>
                                             <td class="tabel"><input type="number" name="AantalHawai" size="3" min="0" value="0"></td>
 
                                         <tr>
                                             <td class="tabel">Pizza Quattro Formaggi</td>
-                                            <td class="tabel">14,50</td>
+                                            <td class="tabel">€<?php echo $PizzaQuattroFormaggi; ?></td>
                                             <td class="tabel"><input type="number" name="AantalFormaggi" size="3" min="0" value="0"></td>
                                         </tr>
             </table>
@@ -144,27 +166,27 @@
                     $PrijsFormaggi = $AantalFormaggi * 7.50;
                     $eindtotaal = $PrijsMargherita + $PrijsFunghi + $PrijsMarina + $PrijsHawai + $PrijsFormaggi;
                 } elseif (date("D", $datum) == "Fri") {
-                    $PrijsMargherita = $AantalMargherita * 12.50;
-                    $PrijsFunghi = $AantalFunghi * 12.50;
-                    $PrijsMarina = $AantalMarina * 13.95;
-                    $PrijsHawai = $AantalHawai * 11.50;
-                    $PrijsFormaggi = $AantalFormaggi * 14.50;
+                    $PrijsMargherita = $AantalMargherita * $PizzaMargherita;
+                    $PrijsFunghi = $AantalFunghi * $PizzaFunghi;
+                    $PrijsMarina = $AantalMarina * $PizzaMarina;
+                    $PrijsHawai = $AantalHawai * $PizzaHawaii;
+                    $PrijsFormaggi = $AantalFormaggi * $PizzaQuattroFormaggi;
                     $eindtotaal = $PrijsMargherita + $PrijsFunghi + $PrijsMarina + $PrijsHawai + $PrijsFormaggi;
                     if ($eindtotaal >= 20) {
-                        $eindtotaal = $eindtotaal * 0.80;
+                        $eindtotaal = $eindtotaal * $ProcentKorting;
                     }
                 } else {
-                    $PrijsMargherita = $AantalMargherita * 12.50;
-                    $PrijsFunghi = $AantalFunghi * 12.50;
-                    $PrijsMarina = $AantalMarina * 13.95;
-                    $PrijsHawai = $AantalHawai * 11.50;
-                    $PrijsFormaggi = $AantalFormaggi * 14.50;
+                    $PrijsMargherita = $AantalMargherita * $PizzaMargherita;
+                    $PrijsFunghi = $AantalFunghi * $PizzaFunghi;
+                    $PrijsMarina = $AantalMarina * $PizzaMarina;
+                    $PrijsHawai = $AantalHawai * $PizzaHawaii;
+                    $PrijsFormaggi = $AantalFormaggi * $PizzaQuattroFormaggi;
                     $eindtotaal = $PrijsMargherita + $PrijsFunghi + $PrijsMarina + $PrijsHawai + $PrijsFormaggi;
                 }
                 if ($_POST["keuze"]) {
                     $keuze = $_POST["keuze"];
                     if ($keuze == "Bezorgen") {
-                        $eindtotaal = $eindtotaal + 5;
+                        $eindtotaal = $eindtotaal + $BezorgKosten;
                     } else {
                         $eindtotaal;
                     }
@@ -183,7 +205,7 @@
             echo $AantalMargherita;
             echo  ' </td>
              <td class="tabel"> ';
-            echo $PrijsMargherita;
+            echo '€' . $PrijsMargherita;
             echo  ' </td>
          </tr>
          <tr>
@@ -192,7 +214,7 @@
             echo $AantalFunghi;
             echo  ' </td>
              <td class="tabel"> ';
-            echo $PrijsFunghi;
+            echo  '€' . $PrijsFunghi;
             echo ' </td>
          </tr>
          <tr>
@@ -201,7 +223,7 @@
             echo $AantalMarina;
             echo ' </td>
              <td class="tabel"> ';
-            echo $PrijsMarina;
+            echo  '€' . $PrijsMarina;
             echo ' </td>
          </tr>
          <tr>
@@ -210,7 +232,7 @@
             echo $AantalHawai;
             echo  ' </td>
              <td class="tabel"> ';
-            echo $PrijsHawai;
+            echo  '€' . $PrijsHawai;
             echo ' </td>
         </tr>
          <tr>
@@ -219,13 +241,13 @@
             echo $AantalFormaggi;
             echo  ' </td>
              <td class="tabel"> ';
-            echo $PrijsFormaggi;
+            echo  '€' . $PrijsFormaggi;
             echo ' </td>
          </tr> 
             
          <tr>
              <td class="tabel">Totale prijs: ';
-            echo $eindtotaal;
+            echo  '€' . $eindtotaal;
             echo ' </td>
         </tr>
 
