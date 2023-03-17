@@ -22,6 +22,9 @@
     </div>
 
     <?php
+    $ingelegd = "";
+    $rente = "";
+    $eindbedrag = "";
     $ingelegd = $_POST["Ingelegd"];
     $rente = $_POST["Rente"];
     $eindbedrag = $_POST["Eindbedrag"];
