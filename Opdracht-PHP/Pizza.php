@@ -2,6 +2,7 @@
 <html lang="nl">
 
 
+
 <?php
 $MonPizzaPrijs = "7.50";
 $FriProcentKorting = "15";
@@ -314,45 +315,78 @@ $eindtotaal = "0";
                 }
             };
 
+            if ($_POST["keuze"]) {
+                $keuze = $_POST["keuze"];
+                if ($keuze == "Bezorgen") {
+                    if (date("D", $datum) == "Mon" || date("D", $datum) == "Tue" || date("D", $datum) == "Wed" || date("D", $datum) == "Thu" || date("D", $datum) == "Sat" || date("D", $datum) == "Sun") {
+                        if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
+                            $EindTotaalVoorKorting = ($PrijsMargherita * $AantalMargherita) + ($PrijsFunghi * $AantalFunghi) + ($PrijsMarina * $AantalMarina) + ($PizzaHawai * $AantalHawai) + ($PizzaQuattroFormaggi * $AantalFormaggi);
+                            echo ' <tr>
+                    <td class="tabel">Totaal:</td>';
+                            echo ' <td class="tabel"> ';
+                            echo '€' . number_format("$EindTotaalVoorKorting", 2, ",");
+                            echo ' </td>
+                    </tr> ';
+                        }
+                    }
+                }
+            };
 
-            // if (date("D", $datum) == "Fri") {
-            //     $Korting = $EindTotaalVoorKorting - $eindtotaal;
-            //     echo ' <tr>
-            //  <td class="tabel">Korting:</td> ';
-            //     echo  ' <td class="tabel"> ';
-            //     echo '€' . number_format("$Korting ", 2, ",");
-            //     echo ' </td> 
-            // </tr> ';
-            // };
 
-            // if ($_POST["keuze"]) {
-            //     $keuze = $_POST["keuze"];
-            //     if ($keuze == "Bezorgen") {
-            //         $eindtotaal = $eindtotaal + $BezorgKosten;
-            //     } else {
-            //         $eindtotaal;
-            //     }
-            // }
+            if (date("D", $datum) == "Fri") {
+                $Korting = $EindTotaalVoorKorting - $eindtotaal;
+                echo ' <tr>
+             <td class="tabel">Korting:</td> ';
+                echo  ' <td class="tabel"> ';
+                echo '€' . number_format("$Korting ", 2, ",");
+                echo ' </td> 
+            </tr> ';
+            };
 
-            // if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
-            //     if ($keuze == "Bezorgen") {
-            //         echo ' <tr>
-            //           <td class="tabel">Bezorgkosten </td> ';
-            //         echo ' <td class="tabel"> ';
-            //         echo '€' . number_format("$BezorgKosten", 2, ",");
-            //         ' </td>
-            // </tr> ';
-            //     };
-            // };
+            if ($_POST["keuze"]) {
+                $keuze = $_POST["keuze"];
+                if ($keuze == "Bezorgen") {
+                    if (date("D", $datum) == "Fri") {
+                        $EindTotaalNaKorting = $EindTotaalVoorKorting - $Korting;
+                        echo ' <tr>
+             <td class="tabel">Totaal:</td> ';
+                        echo  ' <td class="tabel"> ';
+                        echo '€' . number_format("$EindTotaalNaKorting ", 2, ",");
+                        echo ' </td> 
+            </tr> ';
+                    }
+                }
+            };
 
-            // if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
-            //     echo ' <tr>
-            //  <td class="tabel">Te betalen: </td> ';
-            //     echo '<td class="tabel"> ';
-            //     echo  '€' . number_format("$eindtotaal", 2, ",");
-            //     echo ' </td>
-            // </tr> ';
-            // };
+
+            if ($_POST["keuze"]) {
+                $keuze = $_POST["keuze"];
+                if ($keuze == "Bezorgen") {
+                    $eindtotaal = $eindtotaal + $BezorgKosten;
+                } else {
+                    $eindtotaal;
+                }
+            }
+
+            if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
+                if ($keuze == "Bezorgen") {
+                    echo ' <tr>
+                      <td class="tabel">Bezorgkosten </td> ';
+                    echo ' <td class="tabel"> ';
+                    echo '€' . number_format("$BezorgKosten", 2, ",");
+                    ' </td>
+            </tr> ';
+                };
+            };
+
+            if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
+                echo ' <tr>
+             <td class="tabel">Te betalen: </td> ';
+                echo '<td class="tabel"> ';
+                echo  '€' . number_format("$eindtotaal", 2, ",");
+                echo ' </td>
+            </tr> ';
+            };
 
 
             ' </table> ';
