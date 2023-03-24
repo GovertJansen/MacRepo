@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-
 <?php
 $MonPizzaPrijs = "7.50";
 $FriProcentKorting = "15";
@@ -51,6 +50,20 @@ $eindtotaal = "0";
             $plaats = $_POST["plaats"];
             $datum = strtotime($_POST["tijd"]);
 
+            $datum1 = date('l', $datum);
+            function nlDate($datum1)
+            {
+                $datum1 = str_replace("Monday",         "Maandag",         $datum1);
+                $datum1 = str_replace("Tuesday",     "Dinsdag",         $datum1);
+                $datum1 = str_replace("Wednesday",     "Woensdag",     $datum1);
+                $datum1 = str_replace("Thursday",     "Donderdag",     $datum1);
+                $datum1 = str_replace("Friday",         "Vrijdag",         $datum1);
+                $datum1 = str_replace("Saturday",     "Zaterdag",     $datum1);
+                $datum1 = str_replace("Sunday",         "Zondag",         $datum1);
+                echo $datum1;
+            }
+
+
             echo "Bedankt voor de bestelling! <br>";
             echo "Naam: " . $naam .
                 "<br>";
@@ -60,7 +73,8 @@ $eindtotaal = "0";
                 "<br>";
             echo "Plaats: " . $plaats .
                 "<br>";
-            echo "Besteldatum: " . date('l d/M/Y', $datum) . ", " . date('H:i', $datum) .
+            echo "Besteldatum: ";
+            echo  nlDate($datum1) . " " . date('d/m/Y', $datum) . ", " . date('H:i', $datum) .
                 "<br>";
         }
 
