@@ -2,7 +2,6 @@
 <html lang="nl">
 
 
-
 <?php
 $MonPizzaPrijs = "7.50";
 $FriProcentKorting = "15";
@@ -301,11 +300,11 @@ $eindtotaal = "0";
             </tr> ';
             }
 
-
+            //////
 
             if (date("D", $datum) == "Fri") {
                 if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
-                    $EindTotaalVoorKorting = ($PrijsMargherita * $AantalMargherita) + ($PrijsFunghi * $AantalFunghi) + ($PrijsMarina * $AantalMarina) + ($PizzaHawai * $AantalHawai) + ($PizzaQuattroFormaggi * $AantalFormaggi);
+                    $EindTotaalVoorKorting = ($PrijsMargherita + $PrijsFunghi  + $PrijsMarina  + $PrijsHawai + $PrijsFormaggi);
                     echo ' <tr>
                     <td class="tabel">Totaal:</td>';
                     echo ' <td class="tabel"> ';
@@ -318,9 +317,9 @@ $eindtotaal = "0";
             if ($_POST["keuze"]) {
                 $keuze = $_POST["keuze"];
                 if ($keuze == "Bezorgen") {
-                    if (date("D", $datum) == "Mon" || date("D", $datum) == "Tue" || date("D", $datum) == "Wed" || date("D", $datum) == "Thu" || date("D", $datum) == "Sat" || date("D", $datum) == "Sun") {
+                    if (date("D", $datum) == "Mon" || date("D", $datum) == "Tue" || date("D", $datum) == "Wed" || date("D", $datum) == "Thu" || date("D", $datum) == "Sat") {
                         if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
-                            $EindTotaalVoorKorting = ($PrijsMargherita * $AantalMargherita) + ($PrijsFunghi * $AantalFunghi) + ($PrijsMarina * $AantalMarina) + ($PizzaHawai * $AantalHawai) + ($PizzaQuattroFormaggi * $AantalFormaggi);
+                            $EindTotaalVoorKorting = ($PrijsMargherita + $PrijsFunghi  + $PrijsMarina  + $PrijsHawai + $PrijsFormaggi);
                             echo ' <tr>
                     <td class="tabel">Totaal:</td>';
                             echo ' <td class="tabel"> ';
