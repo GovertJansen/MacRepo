@@ -1,25 +1,9 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-<?php
-$MonPizzaPrijs = "7.50";
-$FriProcentKorting = "15";
-$FriPrijsVanaf = "20";
-$BezorgKosten = "5";
-$PizzaMargherita = "12.50";
-$PizzaFunghi = "12.50";
-$PizzaMarina = "13.95";
-$PizzaHawai = "11.30";
-$PizzaQuattroFormaggi = "14.50";
-$PrijsMargherita = "";
-$PrijsFunghi = "";
-$PrijsMarina = "";
-$PrijsHawai = "";
-$PrijsFormaggi = "";
-$eindtotaal = "0";
+<!-- Pizza's uit array halen -->
 
-?>
-
+<!-- echo $pizza[0]["atrikel"]; -->
 
 <head>
     <meta charset="UTF-8">
@@ -29,20 +13,38 @@ $eindtotaal = "0";
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<!-- <?php
-        $pizza = array(
-            array('artikel' => 'Pizza Margherita', 'prijs' => 12.50, 'aantal' => 0),
-            array('artikel' => 'Pizza Funghi', 'prijs' => 12.50, 'aantal' => 0),
-            array('artikel' => 'Pizza Marina', 'prijs' => 13.95, 'aantal' => 0),
-            array('artikel' => 'Pizza Hawaii',  'prijs' => 11.30, 'aantal' => 0),
-            array('artikel' => 'Pizza Quattro Formaggi', 'prijs' => 14.50, 'aantal' => 0)
-        );
-        ?> -->
-
 <body>
+    <?php
+    $MonPizzaPrijs = "7.50";
+    $FriProcentKorting = "15";
+    $FriPrijsVanaf = "20";
+    $BezorgKosten = "5";
+    // $PizzaMargherita = "12.50";
+    // $PizzaFunghi = "12.50";
+    // $PizzaMarina = "13.95";
+    // $PizzaHawai = "11.30";
+    // $PizzaQuattroFormaggi = "14.50";
+    $PrijsMargherita = "";
+    $PrijsFunghi = "";
+    $PrijsMarina = "";
+    $PrijsHawai = "";
+    $PrijsFormaggi = "";
+    $eindtotaal = "0";
+    ?>
+
+    <?php
+    $pizza = array(
+        array('artikel' => 'Pizza Margherita', 'prijs' => 12.50, 'aantal' => 0),
+        array('artikel' => 'Pizza Funghi', 'prijs' => 12.50, 'aantal' => 0),
+        array('artikel' => 'Pizza Marina', 'prijs' => 13.95, 'aantal' => 0),
+        array('artikel' => 'Pizza Hawaii',  'prijs' => 11.30, 'aantal' => 0),
+        array('artikel' => 'Pizza Quattro Formaggi', 'prijs' => 14.50, 'aantal' => 0)
+    );
+    ?>
+
+
     <div class="post">
         <?php
-
         if (isset($_POST["submit"])) {
             $naam = $_POST["naam"];
             $adres = $_POST["adres"];
@@ -114,8 +116,24 @@ $eindtotaal = "0";
                 </div>
             </div>
 
-
             <table class="tabel1">
+                <tr>
+                    <th>Soort</th>
+                    <th>Prijs</th>
+                    <th>Aantal</th>
+                </tr>
+                <?php
+                for ($i = 0; $i < count($pizza); $i++) {
+                    echo "<tr>
+                    <td class='tabel'> " . $pizza[$i]['artikel'] . " </td>
+                    <td class='tabel'> " . $pizza[$i]['prijs'] . " </td>
+                    <td class='tabel'> <input type='number' name='aantal1' ' size='3' min='0' value='0'></td>
+                    </tr>";
+                }
+                ?>
+            </table>
+
+            <!-- <table class="tabel1">
                 <h5>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h5>
                         <h5>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf €<?php echo $FriPrijsVanaf; ?><h5>
                                 <h5>Bezorg kosten bedragen €<?php echo $BezorgKosten; ?><h5>
@@ -143,23 +161,6 @@ $eindtotaal = "0";
                                             <td class="tabel">€<?php echo number_format("$PizzaQuattroFormaggi", 2, ","); ?></td>
                                             <td class="tabel"><input type="number" name="AantalFormaggi" size="3" min="0" value="0"></td>
                                         </tr>
-            </table>
-
-            <!-- <table class="tabel1">
-                <tr>
-                    <th>Soort</th>
-                    <th>Prijs</th>
-                    <th>Aantal</th>
-                </tr>
-                 <?php
-                    for ($i = 0; $i < count($pizza); $i++) {
-                        echo "<tr>
-                    <td class='tabel'> " . $pizza[$i]['artikel'] . " </td>
-                    <td class='tabel'> " . $pizza[$i]['prijs'] . " </td>
-                    <td class='tabel'> <input type='number' name='aantal1'" . $pizza[$i]['artikel'] . "' size='3' min='0' value='0'></td>
-                    </tr>";
-                    }
-                    ?>
             </table> -->
 
         </form>
@@ -203,118 +204,118 @@ $eindtotaal = "0";
 
             if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
                 echo ' <table class="tabel2">
-         <tr>
-             <th>Soort</th>
-             <th>Aantal</th>
-             <th>Prijs</th>
-             <th>Totaal</th>
-         </tr> ';
+             <tr>
+                 <th>Soort</th>
+                 <th>Aantal</th>
+                 <th>Prijs</th>
+                 <th>Totaal</th>
+             </tr> ';
             };
 
             if ($AantalMargherita > 0) {
                 echo ' <tr> 
-             <td class="tabel">Pizza Margherita</td>
-             <td class="tabel"> ';
+                 <td class="tabel">Pizza Margherita</td>
+                 <td class="tabel"> ';
                 echo $AantalMargherita;
                 echo  ' </td>
-            <td class="tabel"> ';
+                <td class="tabel"> ';
                 if (date('D', $datum) == "Mon") {
                     echo '€' . number_format("$MonPizzaPrijs", 2, ",");
                 } else {
                     echo '€' . number_format("$PizzaMargherita", 2, ",");
                 };
                 echo '
-            </td>
-             <td class="tabel"> ';
+                </td>
+                 <td class="tabel"> ';
                 echo '€' . number_format("$PrijsMargherita", 2, ",");
                 echo  ' </td>
-             </tr> ';
+                 </tr> ';
             };
 
 
             if ($AantalFunghi > 0) {
                 echo  '<tr>
-             <td class="tabel">Pizza Funghi</td>
-             <td class="tabel"> ';
+                 <td class="tabel">Pizza Funghi</td>
+                 <td class="tabel"> ';
                 echo $AantalFunghi;
                 echo  ' </td>
-                <td class="tabel"> ';
+                    <td class="tabel"> ';
                 if (date('D', $datum) == "Mon") {
                     echo '€' . number_format("$MonPizzaPrijs", 2, ",");
                 } else {
                     echo '€' . number_format("$PizzaFunghi", 2, ",");
                 };
                 echo ' 
-                </td>
-             <td class="tabel"> ';
+                    </td>
+                 <td class="tabel"> ';
                 echo  '€' . number_format("$PrijsFunghi", 2, ",");
                 echo ' </td>
-            </tr> ';
+                </tr> ';
             };
 
             if ($AantalMarina > 0) {
                 echo ' <tr>
-             <td class="tabel">Pizza Marina</td>
-             <td class="tabel"> ';
+                 <td class="tabel">Pizza Marina</td>
+                 <td class="tabel"> ';
                 echo $AantalMarina;
                 echo ' </td>
-                <td class="tabel"> ';
+                    <td class="tabel"> ';
                 if (date('D', $datum) == "Mon") {
                     echo '€' . number_format("$MonPizzaPrijs", 2, ",");
                 } else {
                     echo '€' . number_format("$PizzaMarina", 2, ",");
                 };
                 echo ' 
-                </td>
-             <td class="tabel"> ';
+                    </td>
+                 <td class="tabel"> ';
                 echo  '€' . number_format("$PrijsMarina", 2, ",");
                 echo ' </td>
-            </tr> ';
+                </tr> ';
             };
 
 
             if ($AantalHawai > 0) {
                 echo ' <tr>
-             <td class="tabel">Pizza Hawai</td>
-             <td class="tabel"> ';
+                 <td class="tabel">Pizza Hawai</td>
+                 <td class="tabel"> ';
                 echo $AantalHawai;
                 echo  ' </td>
-                <td class="tabel"> ';
+                    <td class="tabel"> ';
                 if (date('D', $datum) == "Mon") {
                     echo '€' . number_format("$MonPizzaPrijs", 2, ",");
                 } else {
                     echo '€' . number_format("$PizzaHawai", 2, ",");
                 };
                 echo ' 
-                </td>
-             <td class="tabel"> ';
+                    </td>
+                 <td class="tabel"> ';
                 echo  '€' . number_format("$PrijsHawai", 2, ",");
                 echo ' </td>
-            </tr> ';
+                </tr> ';
             };
 
 
             if ($AantalFormaggi > 0) {
                 echo ' <tr>
-             <td class="tabel">Pizza Quattro Formaggi</td>
-             <td class="tabel"> ';
+                 <td class="tabel">Pizza Quattro Formaggi</td>
+                 <td class="tabel"> ';
                 echo $AantalFormaggi;
                 echo  ' </td>
-                <td class="tabel"> ';
+                    <td class="tabel"> ';
                 if (date('D', $datum) == "Mon") {
                     echo '€' . number_format("$MonPizzaPrijs", 2, ",");
                 } else {
                     echo '€' . number_format("$PizzaQuattroFormaggi", 2, ",");
                 };
                 echo ' 
-                </td>
-             <td class="tabel"> ';
+                    </td>
+                 <td class="tabel"> ';
                 echo  '€' . number_format("$PrijsFormaggi", 2, ",");
                 echo ' </td>
-            </tr> ';
+                </tr> ';
             }
 
-            //////
+
 
             if (date("D", $datum) == "Fri") {
                 if ($AantalMargherita > 0 || $AantalFunghi > 0 || $AantalMarina > 0 || $AantalHawai > 0 || $AantalFormaggi > 0) {
