@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-<!-- Pizza's uit array halen,      echo $pizza[0]["atrikel"]; -->
+<!-- Pizza's uit array halen,      echo $pizza["Margherita"]["naam"]; -->
 
 <head>
     <meta charset="UTF-8">
@@ -21,8 +21,9 @@
 
     $eindtotaal = "0";
     ?>
-
     <?php
+    $test = ['test1', 'test2'];
+    $test = ['test' => '1', 'test5' => '2'];
     $pizzas = array(
         "Margherita" => array('name' => 'Margherita', 'prijs' => 12.50, 'aantal' => 0),
         "Funghi" => array('name' => 'Funghi', 'prijs' => 12.50, 'aantal' => 0),
@@ -77,7 +78,12 @@
             $cost = 0;
             foreach ($pizzas as $index => $pizza) {
                 echo "<br>" .  $pizza['name'] . ": " . $_POST[$index] . "</br>";
-                $cost += $pizza['prijs'] * $_POST[$index];
+
+                if (date('D', $datum) == "Mon") {
+                    $cost += $MonPizzaPrijs * $_POST[$index];
+                } else {
+                    $cost += $pizza['prijs'] * $_POST[$index];
+                };
             }
             echo "<br> Total cost: " . $cost . "</br>";
         }
@@ -96,12 +102,12 @@
             <div class="formulier">
                 <div class="formulieronderelkaar">
 
-                    <input type="text" placeholder="Naam" name="naam" class="tekstinput" required>
-                    <input type="text" placeholder="Adres" name="adres" class="tekstinput" required>
-                    <input type="text" placeholder="Postcode" name="postcode" class="tekstinput" required>
-                    <input type="text" placeholder="Plaats" name="plaats" class="tekstinput" required>
+                    <input type="text" placeholder="Naam" name="naam" class="tekstinput">
+                    <input type="text" placeholder="Adres" name="adres" class="tekstinput">
+                    <input type="text" placeholder="Postcode" name="postcode" class="tekstinput">
+                    <input type="text" placeholder="Plaats" name="plaats" class="tekstinput">
                     <label for="date"> Besteldatum </label>
-                    <input id="date" type="datetime-local" name="tijd" class="tekstinput" required>
+                    <input id="date" type="datetime-local" name="tijd" class="tekstinput">
 
                     <label>Bezorgen/Afhalen </label>
                     <select name="keuze">
@@ -134,41 +140,9 @@
 
                 ?>
             </table>
-
-
-            <!-- <table class="tabel1">
-                <h5>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h5>
-                <h5>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf €<?php echo $FriPrijsVanaf; ?><h5>
-                <h5>Bezorg kosten bedragen €<?php echo $BezorgKosten; ?><h5>
-                <tr>
-                    <td class="tabel">Pizza Margherita</td>
-                    <td class="tabel">€<?php echo number_format("$PizzaMargherita", 2, ","); ?></td>
-                    <td class="tabel"><input type="number" name="pizza[AantalMargherita]" size="3" min="0" value="0"></td>
-                <tr>
-                <tr>
-                    <td class="tabel">Pizza Funghi</td>
-                    <td class="tabel"> €<?php echo number_format("$PizzaFunghi", 2, ","); ?></td>
-                    <td class="tabel"><input type="number" name="pizaAantalFunghi" size="3" min="0" value="0"></td>
-                <tr>
-                <tr>
-                    <td class="tabel">Pizza Marina</td>
-                    <td class="tabel">€<?php echo number_format("$PizzaMarina", 2, ","); ?></td>
-                    <td class="tabel"><input type="number" name="AantalMarina" size="3" min="0" value="0"></td>
-                <tr>
-                    <td class="tabel">Pizza Hawai</td>
-                    <td class="tabel">€<?php echo number_format("$PizzaHawai", 2, ","); ?></td>
-                    <td class="tabel"><input type="number" name="AantalHawai" size="3" min="0" value="0"></td>
-
-                <tr>
-                    <td class="tabel">Pizza Quattro Formaggi</td>
-                    <td class="tabel">€<?php echo number_format("$PizzaQuattroFormaggi", 2, ","); ?></td>
-                    <td class="tabel"><input type="number" name="AantalFormaggi" size="3" min="0" value="0"></td>
-                </tr>
-            </table> -->
-
         </form>
 
-        <?php if (isset($_POST["submit"])) {
+        <?php if (isset($_POST["submitsdfasdfadsfhjghgkjghjvhj"])) {
             $AantalMargherita = $_POST["AantalMargherita"];
             $AantalFunghi = $_POST["AantalFunghi"];
             $AantalMarina = $_POST["AantalMarina"];
