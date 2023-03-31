@@ -13,7 +13,8 @@ body {
     text-align: center;
 }
 
-.tabel {
+.tabel tr td,
+.tabel tr th {
     border: 1px solid black;
 }
 
