@@ -32,6 +32,9 @@
 
         <div class="titel">
             <h1>Pizza di mama</h1>
+            <h5>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h5>
+                    <h5>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf €<?php echo $FriPrijsVanaf; ?><h5>
+                            <h5> Bezorgkosten zijn €<?php echo $BezorgKosten ?>
         </div>
 
         <form action="Pizza.php" method="POST">
@@ -117,54 +120,73 @@
                     echo $keuze . "<br>";
                 }
 
-
-
-
-
                 echo "<table class='tabel'> <tr>
                     <th>Pizza</th>
                     <th>Aantal</th>
                     <th>Prijs</th>
-                    <th>Korting</th>
-                    <th>Totaal prijs</th>
                     </tr>";
 
+
+
                 $Kosten = 0;
+                $TotaalInclKorting = 0;
+                $Korting = 0;
+                $TotaalInclBezorgen = 0;
                 foreach ($pizzas as $key => $pizza) {
                     if ($_POST[$key] <= 0) continue;
-                    $Korting = "";
                     if (date('D', $datum) == "Mon") {
-                        $Kosten += $MonPizzaPrijs * $_POST[$key];
-                        $KostenPerPizza = $MonPizzaPrijs * $_POST[$key];
                         $pizza['prijs'] = $MonPizzaPrijs;
-                    } elseif (date('D', $datum) == "Fri") {
-                        $Kosten += $pizza['prijs'] * $_POST[$key];
-                        $KostenPerPizza = $pizza['prijs'] * $_POST[$key];
+                        $Kosten += $MonPizzaPrijs * $_POST[$key];
                     } else {
                         $Kosten += $pizza['prijs'] * $_POST[$key];
-                        $KostenPerPizza = $pizza['prijs'] * $_POST[$key];
                     };
+                }
 
+                if (date('D', $datum) == "Fri" && $Kosten >= 20) {
+                    $Kosten = $Kosten;
+                    $TotaalInclKorting = $Kosten * $ProcentKorting;
+                    $Korting = $Kosten - $TotaalInclKorting;
+                }
+
+                foreach ($pizzas as $key => $pizza) {
+                    if ($_POST[$key] <= 0) continue;
+                    if (date('D', $datum) == "Mon") {
+                        $pizza['prijs'] = $MonPizzaPrijs;
+                    }
 
                     echo "<tr>" .
-                        "<td>" . $pizza['name']          . "</td>" .
-                        "<td>" . $_POST[$key]            . "</td>" .
-                        "<td>" . "€" . $pizza['prijs']   . "</td>" .
-                        "<td>" . "€" . "$Korting"        . "</td>" .
-                        "<td>" . "€" . "$KostenPerPizza" . "</td>";
+                        "<td>" .       $pizza['name']                          . "</td>" .
+                        "<td>" .       $_POST[$key]                            . "</td>" .
+                        "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>";
                     echo "</tr>";
                 }
-                echo "<td> Totaal prijs: €" . number_format($Kosten, 2, ',') . "</td></table>";
-                if ($Kosten >= 20) {
-                    $Kosten = $Kosten * $ProcentKorting;
-                    $KostenPerPizza = $_POST[$key] * $pizza['prijs'] * $ProcentKorting;
-                    $Korting = $Kosten * $ProcentKorting;
-                    echo $Korting;
+
+                echo "<tr> <td> Totaal prijs: €" . number_format($Kosten, 2, ',') . "</td> </tr> ";
+
+                if ($Korting > 0) {
+                    echo "<tr> <td> Korting: €" . number_format($Korting, 2, ',') . "</td> </tr> ";
+                    echo "<tr> <td> Totaal prijs: €" . number_format($TotaalInclKorting, 2, ',') . "</td> </tr>";
+                }
+
+                if (date('D', $datum) == "Fri") {
+                    $TotaalInclBezorgen += $TotaalInclKorting + $BezorgKosten;
+                } else {
+                    $TotaalInclBezorgen += $Kosten + $BezorgKosten;
+                }
+
+
+
+                if (isset($_POST["keuze"])) {
+                    $keuze = $_POST["keuze"];
+                    if ($keuze == "Bezorgen" && $Kosten > 0) {
+                        echo "<tr> <td> Bezorgkosten: €" . number_format($BezorgKosten, 2, ',') . "</td> </tr> ";
+                        echo "<tr> <td> Totaal prijs: €" . number_format($TotaalInclBezorgen, 2, ',') . "</td> </tr> ";
+                    } else null;
                 }
             }
             ?>
         </div>
-        <!--Einde Bon -->
+        <!-- Einde Bon -->
 </body>
 
 </html>
