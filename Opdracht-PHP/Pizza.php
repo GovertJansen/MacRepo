@@ -169,9 +169,14 @@
                 }
 
                 if (date('D', $datum) == "Fri") {
-                    $TotaalInclBezorgen += $TotaalInclKorting + $BezorgKosten;
+                    if ($TotaalInclKorting == 0) {
+                        $TotaalInclBezorgen += $Kosten + $BezorgKosten;
+                    }
+                    if ($TotaalInclKorting > 0) {
+                        $TotaalInclBezorgen += $TotaalInclKorting + $BezorgKosten;
+                    }
                 } else {
-                    $TotaalInclBezorgen += $Kosten + $BezorgKosten;
+                    $TotaalInclBezorgen = $Kosten += $BezorgKosten;
                 }
 
 
