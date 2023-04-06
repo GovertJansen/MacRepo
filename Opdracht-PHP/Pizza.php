@@ -9,6 +9,28 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
+<?php
+function GetPizzasFromDB()
+{
+    $dbhost = "localhost";
+    $dbname = "pizzas";
+    $user = "root";
+    $pass = "root";
+    try {
+        $database = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $pass);
+        $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    $query = "select * from pizzas";
+    $pizzas = $database->prepare($query);
+    $pizzas->execute(array());
+    $pizzas->setFetchMode(PDO::FETCH_ASSOC);
+    return $pizzas;
+}
+?>
+
 <body>
     <?php
     $MonPizzaPrijs = 7.50;
@@ -18,13 +40,7 @@
     $eindtotaal = 0;
     $ProcentKorting =  (100 - $FriProcentKorting) / 100;
 
-    $pizzas = array(
-        "Margherita" => array('name' => 'Margherita', 'prijs' => 12.50, 'aantal' => 0),
-        "Funghi" => array('name' => 'Funghi', 'prijs' => 12.50, 'aantal' => 0),
-        "Marina" => array('name' => 'Marina', 'prijs' => 13.95, 'aantal' => 0),
-        "Hawaii" => array('name' => 'Hawaii',  'prijs' => 11.30, 'aantal' => 0),
-        "Quattro-Formaggi" => array('name' => 'Quattro Formaggi', 'prijs' => 14.50, 'aantal' => 0)
-    );
+
     ?>
 
     <!-- Invoer    -->
@@ -67,11 +83,12 @@
                     <th>Aantal</th>
                 </tr>
                 <?php
-                foreach ($pizzas as $key => $pizza) {
+                $pizzas = GetPizzasFromDB();
+                foreach ($pizzas as $pizza) {
                     echo "<tr>
-                    <td>" . $pizza['name'] . "  </td>
+                    <td>" . $pizza['naam'] . "  </td>
                     <td>€" . number_format($pizza['prijs'], 2, ',') . " </td>
-                    <td><input type='number' name='" . $key . "' size='3' min='0' value='0'></td>
+                    <td><input type='number' name='pizza[" . $pizza['naam'] . "]' size='3' min='0' value='0'></td>
                     </tr>";
                 }
                 ?>
@@ -84,12 +101,12 @@
         <div class="post">
             <?php
             if (isset($_POST["submit"])) {
+                $pizzasPost = $_POST['pizza'];
                 $naam = $_POST["naam"];
                 $adres = $_POST["adres"];
                 $postcode = $_POST["postcode"];
                 $plaats = $_POST["plaats"];
                 $datum = strtotime($_POST["tijd"]);
-
                 $datum1 = date('l', $datum);
                 function nlDate($datum1)
                 {
@@ -126,19 +143,22 @@
                     <th>Prijs</th>
                     </tr>";
 
-
-
                 $Kosten = 0;
                 $TotaalInclKorting = 0;
                 $Korting = 0;
                 $TotaalInclBezorgen = 0;
-                foreach ($pizzas as $key => $pizza) {
-                    if ($_POST[$key] <= 0) continue;
+
+                $pizzas = GetPizzasFromDB();
+
+                foreach ($pizzas as $pizza) {
+                    $pizzaPostAantal = $pizzasPost[$pizza['naam']];
+
+                    if ($pizzaPostAantal <= 0) continue;
                     if (date('D', $datum) == "Mon") {
                         $pizza['prijs'] = $MonPizzaPrijs;
-                        $Kosten += $MonPizzaPrijs * $_POST[$key];
+                        $Kosten += $MonPizzaPrijs * $pizzaPostAantal;
                     } else {
-                        $Kosten += $pizza['prijs'] * $_POST[$key];
+                        $Kosten += $pizza['prijs'] * $pizzaPostAantal;
                     };
                 }
 
@@ -148,15 +168,18 @@
                     $Korting = $Kosten - $TotaalInclKorting;
                 }
 
-                foreach ($pizzas as $key => $pizza) {
-                    if ($_POST[$key] <= 0) continue;
+                $pizzas = GetPizzasFromDB();
+
+                foreach ($pizzas as $pizza) {
+                    $pizzaAantal = $pizzasPost[$pizza["naam"]];
+                    if ($pizzasPost[$pizza["naam"]] <= 0) continue;
                     if (date('D', $datum) == "Mon") {
                         $pizza['prijs'] = $MonPizzaPrijs;
                     }
 
                     echo "<tr>" .
-                        "<td>" .       $pizza['name']                          . "</td>" .
-                        "<td>" .       $_POST[$key]                            . "</td>" .
+                        "<td>" .       $pizza['naam']                          . "</td>" .
+                        "<td>" .             $pizzaAantal                     . "</td>" .
                         "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>";
                     echo "</tr>";
                 }
@@ -179,14 +202,12 @@
                     $TotaalInclBezorgen = $Kosten += $BezorgKosten;
                 }
 
-
-
                 if (isset($_POST["keuze"])) {
                     $keuze = $_POST["keuze"];
                     if ($keuze == "Bezorgen" && $Kosten > 0) {
                         echo "<tr> <td> Bezorgkosten: €" . number_format($BezorgKosten, 2, ',') . "</td> </tr> ";
                         echo "<tr> <td> Totaal prijs: €" . number_format($TotaalInclBezorgen, 2, ',') . "</td> </tr> ";
-                    } else null;
+                    }
                 }
             }
             ?>
