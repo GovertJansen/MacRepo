@@ -39,6 +39,7 @@ function GetPizzasFromDB()
     $BezorgKosten = 5;
     $eindtotaal = 0;
     $ProcentKorting =  (100 - $FriProcentKorting) / 100;
+    $KortingDag = "Fri";
 
 
     ?>
@@ -141,6 +142,7 @@ function GetPizzasFromDB()
                     <th>Pizza</th>
                     <th>Aantal</th>
                     <th>Prijs</th>
+                    <th>Totaal Prijs</th>
                     </tr>";
 
                 $Kosten = 0;
@@ -151,47 +153,37 @@ function GetPizzasFromDB()
                 $pizzas = GetPizzasFromDB();
 
                 foreach ($pizzas as $pizza) {
-                    $pizzaPostAantal = $pizzasPost[$pizza['naam']];
-
-                    if ($pizzaPostAantal <= 0) continue;
+                    $pizzaAantal = $pizzasPost[$pizza["naam"]];
+                    if ($pizzasPost[$pizza["naam"]] <= 0) continue;
                     if (date('D', $datum) == "Mon") {
                         $pizza['prijs'] = $MonPizzaPrijs;
-                        $Kosten += $MonPizzaPrijs * $pizzaPostAantal;
+                        $Kosten += $MonPizzaPrijs * $pizzaAantal;
                     } else {
-                        $Kosten += $pizza['prijs'] * $pizzaPostAantal;
+                        $Kosten += $pizza['prijs'] * $pizzaAantal;
                     };
+
+                    echo "<tr>" .
+                        "<td>" .       $pizza['naam']                          . "</td>" .
+                        "<td>" .             $pizzaAantal                     . "</td>" .
+                        "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>" .
+                        "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>";
+                    echo "</tr>";
                 }
 
-                if (date('D', $datum) == "Fri" && $Kosten >= 20) {
+                if (date('D', $datum) == $KortingDag && $Kosten >= 20) {
                     $Kosten = $Kosten;
                     $TotaalInclKorting = $Kosten * $ProcentKorting;
                     $Korting = $Kosten - $TotaalInclKorting;
                 }
 
-                $pizzas = GetPizzasFromDB();
-
-                foreach ($pizzas as $pizza) {
-                    $pizzaAantal = $pizzasPost[$pizza["naam"]];
-                    if ($pizzasPost[$pizza["naam"]] <= 0) continue;
-                    if (date('D', $datum) == "Mon") {
-                        $pizza['prijs'] = $MonPizzaPrijs;
-                    }
-
-                    echo "<tr>" .
-                        "<td>" .       $pizza['naam']                          . "</td>" .
-                        "<td>" .             $pizzaAantal                     . "</td>" .
-                        "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>";
-                    echo "</tr>";
-                }
-
-                echo "<tr> <td> Totaal prijs: €" . number_format($Kosten, 2, ',') . "</td> </tr> ";
+                echo "<tr> <td> Totaal prijs:</td> <td>-</td> <td>-</td><td>€" . number_format($Kosten, 2, ',') . "</td> </tr> ";
 
                 if ($Korting > 0) {
-                    echo "<tr> <td> Korting: €" . number_format($Korting, 2, ',') . "</td> </tr> ";
-                    echo "<tr> <td> Totaal prijs: €" . number_format($TotaalInclKorting, 2, ',') . "</td> </tr>";
+                    echo "<tr> <td> Korting: </td> <td>-</td><td> - </td> <td>€" . number_format($Korting, 2, ',') . "</td> </tr> ";
+                    echo "<tr> <td> Totaal prijs: </td> <td>-</td><td> - </td> <td>€" . number_format($TotaalInclKorting, 2, ',') . "</td></tr>";
                 }
 
-                if (date('D', $datum) == "Fri") {
+                if (date('D', $datum) == $KortingDag) {
                     if ($TotaalInclKorting == 0) {
                         $TotaalInclBezorgen += $Kosten + $BezorgKosten;
                     }
@@ -205,8 +197,8 @@ function GetPizzasFromDB()
                 if (isset($_POST["keuze"])) {
                     $keuze = $_POST["keuze"];
                     if ($keuze == "Bezorgen" && $Kosten > 0) {
-                        echo "<tr> <td> Bezorgkosten: €" . number_format($BezorgKosten, 2, ',') . "</td> </tr> ";
-                        echo "<tr> <td> Totaal prijs: €" . number_format($TotaalInclBezorgen, 2, ',') . "</td> </tr> ";
+                        echo "<tr> <td> Bezorgkosten:</td><td>-</td><td> - </td><td>€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
+                        echo "<tr> <td> Totaal prijs: </td><td>-</td><td> - </td> <td> €" . number_format($TotaalInclBezorgen, 2, ',') . " </td> </tr> ";
                     }
                 }
             }

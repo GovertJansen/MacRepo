@@ -3,6 +3,7 @@ $dbhost = "localhost";
 $dbname = "pizzas";
 $user = "root";
 $pass = "root";
+
 try {
     $database = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $pass);
     $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,3 +20,12 @@ foreach ($pizzas as $pizza) {
     echo ",   Prijs:" . $pizza["prijs"];
     echo "<br>";
 }
+
+$Q = 20;
+function Rekenen($a)
+{
+    return   $a * 0.21;
+}
+$Som = Rekenen(2);
+echo $Som;
+echo "btw bedrag van $Q euro is " . Rekenen($Q) . "";
