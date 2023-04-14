@@ -87,7 +87,7 @@ function GetPizzasFromDB()
                     <th>Pizza</th>
                     <th>Aantal</th>
                     <th>Prijs</th>
-                    <th>Totaal Prijs</th>
+                    <th>Totaal prijs</th>
                     </tr>";
 
                 $Kosten = 0;
@@ -116,7 +116,7 @@ function GetPizzasFromDB()
                         "<td>" .       $pizza['naam']                          . "</td>" .
                         "<td>" .             $pizzaAantal                     . "</td>" .
                         "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>" .
-                        "<td>" . "€" . number_format($TotaalPerPizza, 2, ',') . "</td>";
+                        "<td class='pp'>" . "€" . number_format($TotaalPerPizza, 2, ',') . "</td>";
                     echo "</tr>";
                 }
 
@@ -126,11 +126,11 @@ function GetPizzasFromDB()
                     $Korting = $Kosten - $TotaalInclKorting;
                 }
 
-                echo "<tr> <td> Totaal prijs:</td> <td></td> <td></td><td>€" . number_format($Kosten, 2, ',') . "</td> </tr> ";
+                echo "<tr>  <td> <hr class='tr'>  Totaal prijs: </td> <td></td> <td></td><td><hr> €" . number_format($Kosten, 2, ',') . "</td> </tr> ";
 
                 if ($Korting > 0) {
                     echo "<tr> <td> Korting: </td> <td></td><td>  </td> <td>-€" . number_format($Korting, 2, ',') . "</td> </tr> ";
-                    echo "<tr> <td> Totaal prijs: </td> <td></td><td> </td> <td>€" . number_format($TotaalInclKorting, 2, ',') . "</td></tr>";
+                    echo "<tr> <td> <hr class='tr'>Totaal prijs: </td> <td></td><td> </td> <td><hr>€" . number_format($TotaalInclKorting, 2, ',') . "</td></tr>";
                 }
 
                 if (date('D', $datum) == $KortingDag) {
@@ -147,8 +147,8 @@ function GetPizzasFromDB()
                 if (isset($_POST["keuze"])) {
                     $keuze = $_POST["keuze"];
                     if ($keuze == "Bezorgen" && $Kosten > 0) {
-                        echo "<tr> <td> Bezorgkosten:</td><td></td><td>  </td><td>€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
-                        echo "<tr> <td> Totaal prijs: </td><td></td><td> </td> <td> €" . number_format($TotaalInclBezorgen, 2, ',') . " </td> </tr> ";
+                        echo "<tr> <td> Bezorgkosten:</td><td></td><td>  </td><td>+€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
+                        echo "<tr> <td><hr class='tr'> Totaal prijs: </td><td></td><td> </td> <td><hr> €" . number_format($TotaalInclBezorgen, 2, ',') . " </td> </tr> ";
                     }
                 }
             }

@@ -16,6 +16,7 @@ body {
 .titel {
     font-family: sans-serif;
     text-align: center;
+    margin-top: 4%;
 }
 
 .container {
@@ -26,10 +27,19 @@ body {
     align-items: center;
 }
 
+.container2 {
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 8%;
+}
 
-.tabel tr td,
-.tabel tr th {
+.tabel,
+th {
+    margin-top: 3%;
     border: 1px solid black;
+    text-align: center;
 }
 
 .formulier {
@@ -67,10 +77,16 @@ body {
 
 .titel2 {
     font-family: sans-serif;
-    text-align: center;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 2%;
 }
 
 .return {
     font-family: sans-serif;
     margin-top: 9%;
+}
+
+.tr {
+    opacity: 0;
 }

@@ -41,15 +41,13 @@ function GetPizzasFromDB()
 
 <body>
     <!-- Invoer    -->
-    <div class="main">
-
-        <div class="titel">
-            <h1>Pizza di mama</h1>
-            <h5>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h5>
-                    <h5>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf €<?php echo $FriPrijsVanaf; ?><h5>
-                            <h5> Bezorgkosten zijn €<?php echo $BezorgKosten ?>
-        </div>
-
+    <div class="titel">
+        <h1>Pizza di mama</h1>
+        <h4>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h4>
+                <h4>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf €<?php echo $FriPrijsVanaf; ?><h4>
+                        <h4> Bezorgkosten zijn €<?php echo $BezorgKosten ?> <h4>
+    </div>
+    <div class="container2">
         <form action="PizzaBon.php" method="POST">
             <div class="formulier">
                 <div class="formulieronderelkaar">
@@ -76,7 +74,7 @@ function GetPizzasFromDB()
             <table class="tabel">
                 <tr>
                     <th>Soort</th>
-                    <th>Prijs</th>
+                    <th>Prijs </th>
                     <th>Aantal</th>
                 </tr>
                 <?php
@@ -84,14 +82,16 @@ function GetPizzasFromDB()
                 foreach ($pizzas as $pizza) {
                     echo "<tr>
                     <td>" . $pizza['naam'] . "  </td>
-                    <td>€" . number_format($pizza['prijs'], 2, ',') . " </td>
+                    <td >€" . number_format($pizza['prijs'], 2, ',') . " </td>
                     <td><input type='number' name='pizza[" . $pizza['naam'] . "]' size='3' min='0' value='0'></td>
                     </tr>";
                 }
                 ?>
             </table>
         </form>
-        <!-- Einde Invoer -->
+    </div>
+
+    <!-- Einde Invoer -->
 
 
 
