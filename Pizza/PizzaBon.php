@@ -8,7 +8,6 @@
     <title>Pizza</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-
 <?php
 $MonPizzaPrijs = 7.50;
 $FriProcentKorting = 15;
@@ -41,6 +40,9 @@ function GetPizzasFromDB()
 
 <body>
     <!-- Bon -->
+    <div class="titel2">
+        <h1>Bon</h1>
+    </div>
     <div class="container">
         <div class="post">
             <?php
@@ -151,14 +153,17 @@ function GetPizzasFromDB()
                 }
             }
             ?>
+            </table>
+            <div class="return">
+                <a href=Pizza.php>
+                    <input type="submit" value="Opnieuw bestellen" />
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="return">
-        <a href=Pizza.php>
-            <input type="submit" value="Opnieuw bestellen" />
-        </a>
-    </div>
+
+
     <!-- Einde Bon -->
 </body>
 

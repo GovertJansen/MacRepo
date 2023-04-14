@@ -26,6 +26,7 @@ body {
     align-items: center;
 }
 
+
 .tabel tr td,
 .tabel tr th {
     border: 1px solid black;
@@ -64,6 +65,12 @@ body {
     text-align: left;
 }
 
+.titel2 {
+    font-family: sans-serif;
+    text-align: center;
+}
+
 .return {
     font-family: sans-serif;
+    margin-top: 9%;
 }
