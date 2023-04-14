@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pizza</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <?php
+$MonPizzaPrijs = 7.50;
+$FriProcentKorting = 15;
+$FriPrijsVanaf = 20;
+$BezorgKosten = 5;
+$eindtotaal = 0;
+$ProcentKorting =  (100 - $FriProcentKorting) / 100;
+$KortingDag = "Fri";
+
 function GetPizzasFromDB()
 {
     $dbhost = "localhost";
@@ -32,73 +40,8 @@ function GetPizzasFromDB()
 ?>
 
 <body>
-    <?php
-    $MonPizzaPrijs = 7.50;
-    $FriProcentKorting = 15;
-    $FriPrijsVanaf = 20;
-    $BezorgKosten = 5;
-    $eindtotaal = 0;
-    $ProcentKorting =  (100 - $FriProcentKorting) / 100;
-    $KortingDag = "Fri";
-
-
-    ?>
-
-    <!-- Invoer    -->
-    <div class="main">
-
-        <div class="titel">
-            <h1>Pizza di mama</h1>
-            <h5>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h5>
-                    <h5>Vrijdag <?php echo $FriProcentKorting ?>% korting op je bestelling vanaf €<?php echo $FriPrijsVanaf; ?><h5>
-                            <h5> Bezorgkosten zijn €<?php echo $BezorgKosten ?>
-        </div>
-
-        <form action="Pizza.php" method="POST">
-            <div class="formulier">
-                <div class="formulieronderelkaar">
-
-                    <input type="text" placeholder="Naam" name="naam" class="tekstinput">
-                    <input type="text" placeholder="Adres" name="adres" class="tekstinput">
-                    <input type="text" placeholder="Postcode" name="postcode" class="tekstinput">
-                    <input type="text" placeholder="Plaats" name="plaats" class="tekstinput">
-                    <label for="date"> Besteldatum </label>
-                    <input id="date" type="datetime-local" name="tijd" class="tekstinput">
-
-                    <label>Bezorgen/Afhalen </label>
-                    <select name="keuze">
-                        <option name="afbe" disabled selected hidden value="">Maak uw keuze:</option>
-                        <option name="afbe" value="Afhalen">Afhalen</option>
-                        <option name="afbe" value="Bezorgen">Bezorgen</option>
-                    </select>
-
-                    <input class="bestellen" type="submit" value="Bestellen" name="submit">
-
-                </div>
-            </div>
-
-            <table class="tabel">
-                <tr>
-                    <th>Soort</th>
-                    <th>Prijs</th>
-                    <th>Aantal</th>
-                </tr>
-                <?php
-                $pizzas = GetPizzasFromDB();
-                foreach ($pizzas as $pizza) {
-                    echo "<tr>
-                    <td>" . $pizza['naam'] . "  </td>
-                    <td>€" . number_format($pizza['prijs'], 2, ',') . " </td>
-                    <td><input type='number' name='pizza[" . $pizza['naam'] . "]' size='3' min='0' value='0'></td>
-                    </tr>";
-                }
-                ?>
-            </table>
-        </form>
-        <!-- Einde Invoer -->
-
-
-        <!-- Bon -->
+    <!-- Bon -->
+    <div class="container">
         <div class="post">
             <?php
             if (isset($_POST["submit"])) {
@@ -162,11 +105,16 @@ function GetPizzasFromDB()
                         $Kosten += $pizza['prijs'] * $pizzaAantal;
                     };
 
+                    $prijs = $pizza['prijs'];
+                    $TotaalPerPizza = $pizzaAantal * $prijs;
+
+
+
                     echo "<tr>" .
                         "<td>" .       $pizza['naam']                          . "</td>" .
                         "<td>" .             $pizzaAantal                     . "</td>" .
                         "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>" .
-                        "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>";
+                        "<td>" . "€" . number_format($TotaalPerPizza, 2, ',') . "</td>";
                     echo "</tr>";
                 }
 
@@ -176,11 +124,11 @@ function GetPizzasFromDB()
                     $Korting = $Kosten - $TotaalInclKorting;
                 }
 
-                echo "<tr> <td> Totaal prijs:</td> <td>-</td> <td>-</td><td>€" . number_format($Kosten, 2, ',') . "</td> </tr> ";
+                echo "<tr> <td> Totaal prijs:</td> <td></td> <td></td><td>€" . number_format($Kosten, 2, ',') . "</td> </tr> ";
 
                 if ($Korting > 0) {
-                    echo "<tr> <td> Korting: </td> <td>-</td><td> - </td> <td>€" . number_format($Korting, 2, ',') . "</td> </tr> ";
-                    echo "<tr> <td> Totaal prijs: </td> <td>-</td><td> - </td> <td>€" . number_format($TotaalInclKorting, 2, ',') . "</td></tr>";
+                    echo "<tr> <td> Korting: </td> <td></td><td>  </td> <td>-€" . number_format($Korting, 2, ',') . "</td> </tr> ";
+                    echo "<tr> <td> Totaal prijs: </td> <td></td><td> </td> <td>€" . number_format($TotaalInclKorting, 2, ',') . "</td></tr>";
                 }
 
                 if (date('D', $datum) == $KortingDag) {
@@ -197,14 +145,21 @@ function GetPizzasFromDB()
                 if (isset($_POST["keuze"])) {
                     $keuze = $_POST["keuze"];
                     if ($keuze == "Bezorgen" && $Kosten > 0) {
-                        echo "<tr> <td> Bezorgkosten:</td><td>-</td><td> - </td><td>€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
-                        echo "<tr> <td> Totaal prijs: </td><td>-</td><td> - </td> <td> €" . number_format($TotaalInclBezorgen, 2, ',') . " </td> </tr> ";
+                        echo "<tr> <td> Bezorgkosten:</td><td></td><td>  </td><td>€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
+                        echo "<tr> <td> Totaal prijs: </td><td></td><td> </td> <td> €" . number_format($TotaalInclBezorgen, 2, ',') . " </td> </tr> ";
                     }
                 }
             }
             ?>
         </div>
-        <!-- Einde Bon -->
+    </div>
+
+    <div class="return">
+        <a href=Pizza.php>
+            <input type="submit" value="Opnieuw bestellen" />
+        </a>
+    </div>
+    <!-- Einde Bon -->
 </body>
 
 </html>
