@@ -14,9 +14,7 @@ $MonPizzaPrijs = 7.50;
 $FriProcentKorting = 15;
 $FriPrijsVanaf = 20;
 $BezorgKosten = 5;
-$eindtotaal = 0;
 $ProcentKorting =  (100 - $FriProcentKorting) / 100;
-$KortingDag = "Fri";
 
 function GetPizzasFromDB()
 {
@@ -39,8 +37,9 @@ function GetPizzasFromDB()
 }
 ?>
 
+<!--  Bestelformulier    -->
+
 <body>
-    <!-- Invoer    -->
     <div class="titel">
         <h1>Pizza di mama</h1>
         <h4>Maandag alle pizza's €<?php echo $MonPizzaPrijs; ?> <h4>
@@ -57,10 +56,10 @@ function GetPizzasFromDB()
                     <input type="text" placeholder="Postcode" name="postcode" class="tekstinput">
                     <input type="text" placeholder="Plaats" name="plaats" class="tekstinput">
                     <label for="date"> Besteldatum </label>
-                    <input id="date" type="datetime-local" name="tijd" class="tekstinput">
+                    <input id="date" type="datetime-local" name="tijd" class="tekstinput" required>
 
                     <label>Bezorgen/Afhalen </label>
-                    <select name="keuze">
+                    <select name="keuze" required>
                         <option name="afbe" disabled selected hidden value="">Maak uw keuze:</option>
                         <option name="afbe" value="Afhalen">Afhalen</option>
                         <option name="afbe" value="Bezorgen">Bezorgen</option>
@@ -71,7 +70,7 @@ function GetPizzasFromDB()
                 </div>
             </div>
 
-            <table class="tabel">
+            <table class="tabel1">
                 <tr>
                     <th>Soort</th>
                     <th>Prijs </th>
@@ -82,7 +81,7 @@ function GetPizzasFromDB()
                 foreach ($pizzas as $pizza) {
                     echo "<tr>
                     <td>" . $pizza['naam'] . "  </td>
-                    <td >€" . number_format($pizza['prijs'], 2, ',') . " </td>
+                    <td class='alignR'>€" . number_format($pizza['prijs'], 2, ',') . " </td>
                     <td><input type='number' name='pizza[" . $pizza['naam'] . "]' size='3' min='0' value='0'></td>
                     </tr>";
                 }
@@ -90,11 +89,8 @@ function GetPizzasFromDB()
             </table>
         </form>
     </div>
-
-    <!-- Einde Invoer -->
-
-
-
 </body>
 
 </html>
+
+<!-- Einde Bestelformulier  -->

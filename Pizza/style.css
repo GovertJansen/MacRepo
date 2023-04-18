@@ -35,11 +35,16 @@ body {
     margin-top: 8%;
 }
 
-.tabel,
+.tabel1,
 th {
     margin-top: 3%;
     border: 1px solid black;
     text-align: center;
+}
+
+.tr {
+    opacity: 0;
+    margin: auto;
 }
 
 .formulier {
@@ -61,21 +66,18 @@ th {
 }
 
 .bestellen {
-    position: absolute;
-    margin-top: -21px;
-    margin-left: 350px;
+    margin-top: 20px;
     width: 100px;
     height: 50px;
-    border: black;
-
+    border: solid 2px #04AA6D;
 }
 
 .post {
     font-family: sans-serif;
-    text-align: left;
 }
 
 .titel2 {
+    text-align: center;
     font-family: sans-serif;
     position: absolute;
     margin-left: 50%;
@@ -87,6 +89,30 @@ th {
     margin-top: 9%;
 }
 
-.tr {
-    opacity: 0;
+.tabel2 {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: right;
+}
+
+th,
+td {
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.alignR {
+    text-align: right;
+}
+
+.alignC {
+    text-align: center;
 }

@@ -8,6 +8,7 @@
     <title>Pizza</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <?php
 $MonPizzaPrijs = 7.50;
 $FriProcentKorting = 15;
@@ -38,8 +39,9 @@ function GetPizzasFromDB()
 }
 ?>
 
+<!-- BON -->
+
 <body>
-    <!-- Bon -->
     <div class="titel2">
         <h1>Bon</h1>
     </div>
@@ -54,6 +56,7 @@ function GetPizzasFromDB()
                 $plaats = $_POST["plaats"];
                 $datum = strtotime($_POST["tijd"]);
                 $datum1 = date('l', $datum);
+
                 function nlDate($datum1)
                 {
                     $datum1 = str_replace("Monday",         "Maandag",         $datum1);
@@ -78,12 +81,14 @@ function GetPizzasFromDB()
                 echo "Besteldatum: ";
                 echo  nlDate($datum1) . " " . date('d/m/Y', $datum) . ", " . date('H:i', $datum) .
                     "<br>";
+
                 if (isset($_POST["keuze"])) {
                     $keuze = $_POST["keuze"];
                     echo $keuze . "<br>";
+                } else {
+                    $keuze = null;
                 }
-
-                echo "<table class='tabel'> <tr>
+                echo "<table class='tabel2'> <tr>
                     <th>Pizza</th>
                     <th>Aantal</th>
                     <th>Prijs</th>
@@ -110,27 +115,35 @@ function GetPizzasFromDB()
                     $prijs = $pizza['prijs'];
                     $TotaalPerPizza = $pizzaAantal * $prijs;
 
-
-
                     echo "<tr>" .
-                        "<td>" .       $pizza['naam']                          . "</td>" .
-                        "<td>" .             $pizzaAantal                     . "</td>" .
-                        "<td>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>" .
-                        "<td class='pp'>" . "€" . number_format($TotaalPerPizza, 2, ',') . "</td>";
+                        "<td class='alignC'>" .       $pizza['naam']                          . "</td>" .
+                        "<td class='alignC'>" .             $pizzaAantal                     . "</td>" .
+                        "<td class='alignR'>" . "€" . number_format($pizza['prijs'], 2, ',')  . "</td>" .
+                        "<td class='alignR'>" . "€" . number_format($TotaalPerPizza, 2, ',') . "</td>";
                     echo "</tr>";
                 }
 
                 if (date('D', $datum) == $KortingDag && $Kosten >= 20) {
-                    $Kosten = $Kosten;
                     $TotaalInclKorting = $Kosten * $ProcentKorting;
                     $Korting = $Kosten - $TotaalInclKorting;
                 }
 
-                echo "<tr>  <td> <hr class='tr'>  Totaal prijs: </td> <td></td> <td></td><td><hr> €" . number_format($Kosten, 2, ',') . "</td> </tr> ";
+                echo "<tr>  <td> <hr class='tr'>  Totaal prijs: </td> <td></td> <td></td><td class='pp'><hr> €" . number_format($Kosten, 2, ',');
+
+                if ($keuze == "Afhalen" && $Korting == 0) {
+                    echo "<hr> <hr>";
+                }
+                echo "</td> </tr> ";
+
 
                 if ($Korting > 0) {
-                    echo "<tr> <td> Korting: </td> <td></td><td>  </td> <td>-€" . number_format($Korting, 2, ',') . "</td> </tr> ";
-                    echo "<tr> <td> <hr class='tr'>Totaal prijs: </td> <td></td><td> </td> <td><hr>€" . number_format($TotaalInclKorting, 2, ',') . "</td></tr>";
+                    echo "<tr> <td> Korting: </td> <td></td><td>  </td> <td class='pp'>-€" . number_format($Korting, 2, ',') . "</td> </tr> ";
+                    echo "<tr> <td> <hr class='tr'>Totaal prijs: </td> <td></td><td> </td> <td class='pp'><hr>€" . number_format($TotaalInclKorting, 2, ',');
+
+                    if ($keuze == "Afhalen") {
+                        echo "<hr> <hr>";
+                    }
+                    "</td></tr>";
                 }
 
                 if (date('D', $datum) == $KortingDag) {
@@ -144,12 +157,9 @@ function GetPizzasFromDB()
                     $TotaalInclBezorgen = $Kosten += $BezorgKosten;
                 }
 
-                if (isset($_POST["keuze"])) {
-                    $keuze = $_POST["keuze"];
-                    if ($keuze == "Bezorgen" && $Kosten > 0) {
-                        echo "<tr> <td> Bezorgkosten:</td><td></td><td>  </td><td>+€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
-                        echo "<tr> <td><hr class='tr'> Totaal prijs: </td><td></td><td> </td> <td><hr> €" . number_format($TotaalInclBezorgen, 2, ',') . " </td> </tr> ";
-                    }
+                if ($keuze == "Bezorgen" && $Kosten > 0) {
+                    echo "<tr> <td> Bezorgkosten:</td><td></td><td>  </td><td class='pp'>+€" . number_format($BezorgKosten, 2, ',') . " </td> </tr> ";
+                    echo "<tr> <td>Totaal prijs: </td><td></td><td> </td> <td class='pp'><hr> €" . number_format($TotaalInclBezorgen, 2, ',') . " <hr> <hr> </td> </tr> ";
                 }
             }
             ?>
@@ -161,10 +171,8 @@ function GetPizzasFromDB()
             </div>
         </div>
     </div>
-
-
-
-    <!-- Einde Bon -->
 </body>
 
 </html>
+
+<!-- Einde Bon  -->
