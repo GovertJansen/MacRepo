@@ -8,28 +8,52 @@
     <title>Document</title>
 </head>
 
+<?php
+$ingelegd = 0;
+$rente = 0;
+$eindbedrag = 0;
+
+if (isset($_POST["Ingelegd"]) && is_numeric($_POST["Ingelegd"])) {
+    $ingelegd += $_POST["Ingelegd"];
+}
+
+if (isset($_POST["Rente"]) && is_numeric($_POST["Rente"])) {
+    $rente += $_POST["Rente"];
+}
+
+if (isset($_POST["Eindbedrag"])) {
+    $eindbedrag == $_POST["Eindbedrag"];
+}
+?>
+
 <body>
     <div class="form">
         <form action="Rente.php" method="POST">
             <label for="Ingelegd">Ingelegd bedrag:</label>
-            <input id="Ingelegd" type="text" name="Ingelegd"></input>
+            <input id="Ingelegd" type="number" name="Ingelegd" min="0" required></input>
             <label for="Rente">Rentepercentage</label>
-            <input id="Rente" type="text" name="Rente"></input>
-            <input type="radio" name="Eindbedrag" value="Eindbedrag na 10 jaar">Eindbedrag na 10 jaar</input>
-            <input type="radio" name="Eindbedrag" value="Eindbedrag verdubbeld">Eindbedrag verdubbeld</input>
+            <input id="Rente" type="number" name="Rente" required min="0"></input>
+            <input type="radio" name="Eindbedrag" value="10 jaar" required>Eindbedrag na 10 jaar </input>
+            <input type="radio" name="Eindbedrag" value="verdubbeld" required>Eindbedrag verdubbeld</input>
             <input type="submit" value="Verzenden"></input>
         </form>
     </div>
 
     <?php
-    $ingelegd = "";
-    $rente = "";
-    $eindbedrag = "";
-    $ingelegd = $_POST["Ingelegd"];
-    $rente = $_POST["Rente"];
-    $eindbedrag = $_POST["Eindbedrag"];
-    ?>
 
+    if (isset($_POST["Eindbedrag"]) && $_POST["Eindbedrag"] == "10 jaar") {
+        $eind = $ingelegd;
+        for ($i = 0; $i <= 10; $i++) {
+            $eind = $eind * (1 + ($rente / 100));
+            echo number_format($eind, 2) . "<br>";
+        }
+    }
+    if (isset($_POST["Eindbedrag"]) && $_POST["Eindbedrag"] == "verdubbeld") {
+        for ($eind = $ingelegd; $eind <= $ingelegd * 2; $eind = $eind * (1 + ($rente / 100))) {
+            echo  number_format($eind, 2) . "<br>";
+        }
+    }
+    ?>
 </body>
 
 </html>
