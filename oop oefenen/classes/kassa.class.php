@@ -48,5 +48,3 @@ class Kassa
         }
     }
 }
-
-$kassa1 = new kassa;
