@@ -25,7 +25,7 @@ class Calc
             case 'sub':
                 $result  = $this->num1 - $this->num2;
                 return $result;
-                break;
+                 break;
             case 'div':
                 $result  = $this->num1 / $this->num2;
                 return $result;
