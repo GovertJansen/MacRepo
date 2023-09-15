@@ -8,10 +8,9 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="/Laracast php" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                        <a href="/Laracast php/about.php" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
-                        <a href="/Laracast php/contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
-
+                        <a href="/laracast" class=" <?= urlIs('/laracast/') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                        <a href="/laracast/about" class=" <?= urlIs('/laracast/about') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
+                        <a href="/laracast/contact" class=" <?= urlIs('/laracast/contact') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
                     </div>
                 </div>
             </div>
