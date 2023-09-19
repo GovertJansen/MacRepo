@@ -1,17 +1,14 @@
 <?php require('partials/head.php') ?>
-
 <?php require('partials/nav.php') ?>
-
-
+<?php require('partials/banner.php') ?>
 
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bol">Sorry. Page not found.</h1>
-
-        <p class="mt-4">
-            <a href="/laracast/" class="text-blue-500 hover:underline">Go back home.</a>
+        <p class="mb-6">
+            <a href="/laracast/notes" class="text-blue-500 hover:underline">go back...</a>
         </p>
 
+        <p><?= $note['body'] ?></p>
     </div>
 </main>
 

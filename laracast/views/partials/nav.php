@@ -10,6 +10,7 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="/laracast" class=" <?= urlIs('/laracast/') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
                         <a href="/laracast/about" class=" <?= urlIs('/laracast/about') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
+                        <a href="/laracast/notes" class=" <?= urlIs('/laracast/notes') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notes</a>
                         <a href="/laracast/contact" class=" <?= urlIs('/laracast/contact') ? 'bg-gray-900 text-white' : 'text-gray-300' ?>  hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
                     </div>
                 </div>
