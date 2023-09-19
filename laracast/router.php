@@ -1,14 +1,6 @@
 <?php
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-$routes = [
-    '/laracast/' => 'controllers/index.php',
-    '/laracast/about' => 'controllers/about.php',
-    '/laracast/note' => 'controllers/note.php',
-    '/laracast/notes' => 'controllers/notes.php',
-
-    '/laracast/contact' => 'controllers/contact.php'
-];
+$routes = require('routes.php');
 
 function routeToController($uri, $routes)
 {
@@ -25,5 +17,7 @@ function abort($code = 404)
     require "views/$code.php";
     die();
 }
+
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 routeToController($uri, $routes);
